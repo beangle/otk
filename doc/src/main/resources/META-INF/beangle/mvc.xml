@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<mvc>
+  <profile name="otk-doc" package="org.beangle.otk.doc.web.action">
+    <action suffix="WS" defaultMethod="index" />
+    <url path="/doc" suffix="" style="seo" />
+    <interceptors>
+      <interceptor name="web.Interceptor.cors" />
+    </interceptors>
+  </profile>
+</mvc>

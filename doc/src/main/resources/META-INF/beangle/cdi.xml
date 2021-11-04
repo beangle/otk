@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<cdi>
+  <container name="web">
+    <module class="org.beangle.otk.doc.web.DefaultModule"/>
+  </container>
+
+</cdi>
