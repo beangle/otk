@@ -52,7 +52,8 @@ class IndexWS extends ActionSupport with ServletSupport with Initializing {
   @mapping("validate/{id}")
   def validate(@param("id") id: String): View = {
     val captcha_response = get("response").orNull
-    if captchaService.validateResponse(id, captcha_response) then
+    val trial = getBoolean("trial", false)
+    if captchaService.validateResponse(id, captcha_response, !trial) then
       response.getWriter.write("success")
       Status.Ok
     else

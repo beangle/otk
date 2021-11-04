@@ -4,7 +4,7 @@ import org.beangle.parent.Dependencies._
 import EtkDepends._
 
 ThisBuild / organization := "org.beangle.otk"
-ThisBuild / version := "0.0.1-SNAPSHOT"
+ThisBuild / version := "0.0.1"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
