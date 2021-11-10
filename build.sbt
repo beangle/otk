@@ -4,7 +4,7 @@ import org.beangle.parent.Settings._
 import org.beangle.tools.sbt.Sas
 
 ThisBuild / organization := "org.beangle.otk"
-ThisBuild / version := "0.0.2-SNAPSHOT"
+ThisBuild / version := "0.0.2"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
