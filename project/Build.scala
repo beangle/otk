@@ -3,16 +3,16 @@ import sbt._
 import org.beangle.parent.Dependencies._
 
 object EtkDepends {
-  val commonsVer = "5.2.11"
-  val dataVer = "5.3.27"
-  val cdiVer = "0.3.4"
-  val webVer = "0.0.4"
-  val serializerVer= "0.0.22"
-  val cacheVer= "0.0.25"
-  val templateVer ="0.0.36"
-  val webmvcVer="0.4.8"
-  val securityVer="4.2.32"
-  val docVer="0.0.8"
+  val commonsVer = "5.2.13"
+  val dataVer = "5.3.28"
+  val cdiVer = "0.3.5"
+  val webVer = "0.0.6"
+  val serializerVer= "0.0.23"
+  val cacheVer= "0.0.26"
+  val templateVer ="0.0.37"
+  val webmvcVer="0.4.9"
+  val securityVer="4.2.33"
+  val docVer="0.0.10"
 
   val commonsCore = "org.beangle.commons" %% "beangle-commons-core" % commonsVer
   val commonsFile = "org.beangle.commons" %% "beangle-commons-file" % commonsVer
@@ -32,7 +32,7 @@ object EtkDepends {
   val webmvcCore= "org.beangle.webmvc" %% "beangle-webmvc-core" % webmvcVer
   val webmvcFreemarker= "org.beangle.webmvc" %% "beangle-webmvc-freemarker" % webmvcVer
   val beangle_webmvc_support= "org.beangle.webmvc" %% "beangle-webmvc-support" % webmvcVer
-  val serializerText = "org.beangle.serializer" %% "beangle-serializer-text" % serializerVer
+  val beangle_serializer_text = "org.beangle.serializer" %% "beangle-serializer-text" % serializerVer
   val beangle_doc_pdf = "org.beangle.doc" %% "beangle-doc-pdf" % docVer
 
   val appDepends = Seq(commonsCore, logback_classic, logback_core, scalatest, webAction,cdiApi)

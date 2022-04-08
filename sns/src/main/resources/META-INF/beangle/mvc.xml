@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <mvc>
-  <profile name="otk-captcha" package="org.beangle.otk.captcha.web.action">
+  <profile name="otk-sns" package="org.beangle.otk.sns.web.action">
     <action suffix="WS" defaultMethod="index" />
-    <url path="/captcha" suffix="" style="seo" />
+    <url path="/sns" suffix="" style="seo" />
     <interceptors>
       <interceptor name="web.Interceptor.cors" />
     </interceptors>

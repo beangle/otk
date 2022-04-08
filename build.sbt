@@ -4,7 +4,7 @@ import org.beangle.parent.Settings._
 import org.beangle.tools.sbt.Sas
 
 ThisBuild / organization := "org.beangle.otk"
-ThisBuild / version := "0.0.3-SNAPSHOT"
+ThisBuild / version := "0.0.3"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
@@ -29,7 +29,7 @@ val pinyin4j = "com.belerweb" % "pinyin4j" % "2.5.1"
 
 lazy val root = (project in file("."))
   .settings()
-  .aggregate(captcha, doc, pinyin, ws)
+  .aggregate(captcha, doc, sns, code, ws)
 
 lazy val captcha = (project in file("captcha"))
   .settings(
@@ -38,11 +38,12 @@ lazy val captcha = (project in file("captcha"))
     libraryDependencies ++= Seq(beangle_webmvc_support, cache_caffeine, scalatest)
   )
 
-lazy val pinyin = (project in file("pinyin"))
+lazy val sns = (project in file("sns"))
   .settings(
-    name := "beangle-otk-pinyin",
+    name := "beangle-otk-sns",
     common,
-    libraryDependencies ++= Seq(beangle_webmvc_support, pinyin4j, scalatest)
+    libraryDependencies ++= Seq(beangle_webmvc_support, pinyin4j, scalatest),
+    libraryDependencies ++= Seq(beangle_serializer_text)
   )
 
 lazy val doc = (project in file("doc"))
@@ -52,12 +53,19 @@ lazy val doc = (project in file("doc"))
     libraryDependencies ++= Seq(beangle_webmvc_support, beangle_doc_pdf)
   )
 
+lazy val code = (project in file("code"))
+  .settings(
+    name := "beangle-otk-code",
+    common,
+    libraryDependencies ++= Seq(beangle_webmvc_support, "com.google.zxing" % "javase" % "3.4.1")
+  )
+
 lazy val ws = (project in file("ws"))
   .enablePlugins(WarPlugin)
   .settings(
     name := "beangle-otk-ws",
     common,
     libraryDependencies ++= Seq(Sas.Tomcat % "test")
-  ).dependsOn(captcha, doc, pinyin)
+  ).dependsOn(captcha, doc, sns, code)
 
 publish / skip := true
