@@ -21,10 +21,12 @@ import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.google.zxing.{BarcodeFormat, DecodeHintType, EncodeHintType, MultiFormatWriter}
+import jakarta.servlet.http.HttpServletResponse
 import org.beangle.commons.lang.Charsets
 import org.beangle.commons.net.http.HttpUtils
 import org.beangle.otk.code.web.helper.RangeChecker
 import org.beangle.web.action.annotation.*
+import org.beangle.web.action.context.ActionContext
 import org.beangle.web.action.support.ActionSupport
 import org.beangle.web.action.view.{Stream, View}
 
@@ -44,14 +46,22 @@ class BarWS extends ActionSupport {
 
   @mapping("{content}")
   def index(@param("content") content: String): View = {
-    val width = RangeChecker.check(getInt("width"), 100, 300, 120)
-    val height = RangeChecker.check(getInt("height"), 10, 100, 30)
     val decoded = URLDecoder.decode(content, Charsets.UTF_8)
-    val bitMatrix = new MultiFormatWriter().encode(decoded, BarcodeFormat.CODE_128, width, height, hints)
-    val image = MatrixToImageWriter.toBufferedImage(bitMatrix)
-    val os = new ByteArrayOutputStream()
-    ImageIO.write(image, "PNG", os)
-    Stream(new ByteArrayInputStream(os.toByteArray), "image/png", "barcode.png")
+    val isLatin = decoded.forall(c => c <= 127)
+    if (isLatin) {
+      val width = RangeChecker.check(getInt("width"), 100, 300, 120)
+      val height = RangeChecker.check(getInt("height"), 10, 100, 30)
+      val bitMatrix = new MultiFormatWriter().encode(decoded, BarcodeFormat.CODE_128, width, height, hints)
+      val image = MatrixToImageWriter.toBufferedImage(bitMatrix)
+      val os = new ByteArrayOutputStream()
+      ImageIO.write(image, "PNG", os)
+      Stream(new ByteArrayInputStream(os.toByteArray), "image/png", "barcode.png")
+    } else {
+      val res = ActionContext.current.response
+      res.setContentType("text/html;charset=utf-8")
+      res.getWriter.write("只能编码拉丁字符(<=127)")
+      res.setStatus(HttpServletResponse.SC_BAD_REQUEST)
+      null
+    }
   }
-
 }
