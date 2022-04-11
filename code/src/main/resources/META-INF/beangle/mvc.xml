@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <mvc>
-  <profile name="otk-doc" package="org.beangle.otk.pinyin.web.action">
+  <profile name="otk-code" package="org.beangle.otk.code.web.action">
     <action suffix="WS" defaultMethod="index" />
-    <url path="/pinyin" suffix="" style="seo" />
+    <url path="/code" suffix="" style="seo" />
     <interceptors>
       <interceptor name="web.Interceptor.cors" />
     </interceptors>

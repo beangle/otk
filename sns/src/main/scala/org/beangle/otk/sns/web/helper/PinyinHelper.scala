@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.otk.pinyin.web.helper
+package org.beangle.otk.sns.web.helper
 
 import net.sourceforge.pinyin4j.PinyinHelper as PHelper
 import net.sourceforge.pinyin4j.format.{HanyuPinyinCaseType, HanyuPinyinOutputFormat, HanyuPinyinToneType}

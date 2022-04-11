@@ -15,30 +15,45 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.otk.pinyin.web.action
+package org.beangle.otk.sns.web.action
 
+import jakarta.servlet.http.HttpServletResponse
 import org.beangle.cache.CacheManager
 import org.beangle.commons.bean.Initializing
+import org.beangle.commons.collection.Properties
 import org.beangle.commons.lang.Strings
-import org.beangle.otk.pinyin.web.helper.PinyinHelper
+import org.beangle.otk.sns.web.helper.{IdHelper, PinyinHelper}
 import org.beangle.web.action.annotation.{action, mapping, param, response}
 import org.beangle.web.action.support.{ActionSupport, ServletSupport}
 import org.beangle.web.action.view.{Status, Stream, View}
 
 import java.io.InputStream
 import java.net.URLDecoder
-import java.util.Base64.Decoder
 
-@action("")
-class IndexWS extends ActionSupport with ServletSupport {
+class PersonWS extends ActionSupport with ServletSupport with Initializing {
 
-  @mapping("person/{n}")
-  def person(@param("n") n: String): View = {
-    if Strings.isEmpty(n) then
+  @mapping("pinyin/{name}")
+  def pinyinName(@param("name") name: String): View = {
+    if Strings.isEmpty(name) then
       Status.NotFound
     else
-      response.getWriter.write( PinyinHelper.toNamePinyin(URLDecoder.decode(n,"UTF-8")))
+      response.getWriter.write(PinyinHelper.toNamePinyin(URLDecoder.decode(name, "UTF-8")))
       null
   }
 
+  @mapping("id/{idcard}")
+  def id(@param("idcard") idcard: String): Properties = {
+    val rs = IdHelper.resolve(idcard)
+    if rs._2.isEmpty then
+      response.setContentType("text/html;charset=utf-8")
+      response.getWriter.write(rs._1)
+      response.setStatus(HttpServletResponse.SC_BAD_REQUEST)
+      null
+    else
+      rs._2
+  }
+
+  override def init(): Unit = {
+    IdHelper.load()
+  }
 }

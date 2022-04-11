@@ -15,13 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.otk.pinyin.web
+package org.beangle.otk.code.web.helper
 
-import org.beangle.cdi.bind.BindModule
-import org.beangle.otk.pinyin.web.action.IndexWS
-
-class DefaultModule extends BindModule {
-  protected override def binding(): Unit = {
-    bind(classOf[IndexWS])
+object RangeChecker {
+  def check(v: Option[Int], min: Int, max: Int, default_value: Int): Int = {
+    v match {
+      case None => default_value
+      case Some(i) =>
+        if i < min then min
+        else if i > max then max
+        else i
+    }
   }
 }
