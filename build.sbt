@@ -4,7 +4,7 @@ import org.beangle.parent.Settings._
 import org.beangle.tools.sbt.UndertowPlugin
 
 ThisBuild / organization := "org.beangle.otk"
-ThisBuild / version := "0.0.3"
+ThisBuild / version := "0.0.4"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(

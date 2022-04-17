@@ -47,10 +47,10 @@ class RandomFontGenerator(val minFontSize: Int, val maxFontSize: Int, fontsList:
   }
 
   private def generateCustomStyleFontArray(fonts: Array[Font]): Array[Font] = {
-    val fontList = fonts.filter(f => !this.requiredCharacters.exists(x => !f.canDisplay(x)))
+    val fontList = fonts.filter(f => this.requiredCharacters.forall(x => f.canDisplay(x)))
     val generatedFonts = new Array[Font](GENERATED_FONTS_ARRAY_SIZE)
     for (i <- 0 until GENERATED_FONTS_ARRAY_SIZE) {
-      val w = this.myRandom.nextInt(fontList.size)
+      val w = this.myRandom.nextInt(fontList.length)
       val font = fontList(w)
       val styled = this.applyStyle(font)
       generatedFonts(i) = this.applyCustomDeformationOnGeneratedFont(styled)

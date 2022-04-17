@@ -52,7 +52,7 @@ class ChangeableAttributedString(val g2: Graphics2D, aStrings: Array[AttributedS
 
   private val myRandom = new SecureRandom
 
-   def drawString(g2: Graphics2D): Unit = {
+  def drawString(g2: Graphics2D): Unit = {
     for (i <- 0 until this.length) {
       g2.drawString(this.getIterator(i), this.getX(i).toFloat, this.getY(i).toFloat)
     }
@@ -65,14 +65,14 @@ class ChangeableAttributedString(val g2: Graphics2D, aStrings: Array[AttributedS
     }
   }
 
-  def moveToRandomSpot(background: BufferedImage) :Point2D= {
+  def moveToRandomSpot(background: BufferedImage): Point2D = {
     this.moveToRandomSpot(background, null.asInstanceOf[Point2D])
   }
 
   private def moveToRandomSpot(background: BufferedImage, startingPoint: Point2D): Point2D = {
     val maxHeight = this.getMaxHeight.toInt
-    var maxX = background.getWidth.toDouble - this.getTotalWidth - 10.0D
-    val maxY = (background.getHeight - maxHeight - 5).toDouble
+    var maxX = background.getWidth.toDouble - this.getTotalWidth
+    val maxY = (background.getHeight - maxHeight).toDouble
     var newY = 0
     if (startingPoint == null) newY = this.getMaxAscent.toInt + this.myRandom.nextInt(Math.max(1, maxY.toInt))
     else newY = (startingPoint.getY + this.myRandom.nextInt(10).toDouble).toInt
@@ -82,8 +82,7 @@ class ChangeableAttributedString(val g2: Graphics2D, aStrings: Array[AttributedS
       else newX = (startingPoint.getX + this.myRandom.nextInt(10).toDouble).toInt
       this.moveTo(newX.toDouble, newY.toDouble)
       new Point2D.Float(newX.toFloat, newY.toFloat)
-    }
-    else {
+    } else {
       var problem = "too tall:"
       if (maxX < 0.0D && maxY > 0.0D) {
         problem = "too long:"
@@ -99,13 +98,14 @@ class ChangeableAttributedString(val g2: Graphics2D, aStrings: Array[AttributedS
           return new Point2D.Float(0.0F, newY.toFloat)
         }
       }
-      throw new CaptchaException("word is " + problem + " try to use less letters, smaller font" + " or bigger background: " + " text bounds = " + this + " with fonts " + this.getFontListing + " versus image width = " + background.getWidth + ", height = " + background.getHeight)
+      throw new CaptchaException("word is " + problem + " try to use less letters, smaller font" +
+        " or bigger background: " + " text bounds = " + this + " with fonts " + this.getFontListing +
+        " versus image width = " + background.getWidth + ", height = " + background.getHeight)
     }
   }
 
   private def getFontListing: String = {
     val buf = new StringBuffer
-    val RS = "\n\t"
     buf.append("{")
     for (i <- 0 until this.length) {
       val iter = this.aStrings(i).getIterator
@@ -134,14 +134,11 @@ class ChangeableAttributedString(val g2: Graphics2D, aStrings: Array[AttributedS
     var pct = 0.0D
     val stepSize = maxReductionPct / 25.0D
     pct = stepSize
-    while ( {
-      pct < maxReductionPct && maxX < 0.0D
-    }) {
+    while (pct < maxReductionPct && maxX < 0.0D) {
       for (i <- 1 until this.length) {
         this.bounds(i).setRect((1.0D - pct) * this.bounds(i).getX, this.bounds(i).getY, this.bounds(i).getWidth, this.bounds(i).getHeight)
       }
       maxX = imageWidth.toDouble - this.getTotalWidth
-
       pct += stepSize
     }
     maxX
@@ -174,11 +171,9 @@ class ChangeableAttributedString(val g2: Graphics2D, aStrings: Array[AttributedS
     for (i <- 0 until this.length) {
       buf.append(this.aStrings(i).getIterator.current)
     }
-    val RS = "\n\t"
     buf.append("\n\t")
     for (i <- 0 until this.length) {
       buf.append(this.bounds(i).toString)
-      val FS = " "
       val m = this.metrics(i)
       buf.append(" ascent=").append(m.getAscent).append(" ")
       buf.append("descent=").append(m.getDescent).append(" ")
@@ -207,7 +202,7 @@ class ChangeableAttributedString(val g2: Graphics2D, aStrings: Array[AttributedS
 
   def getMaxWidth: Double = {
     var maxWidth = -1.0D
-    for (i <- 0 until this.bounds.length) {
+    for (i <- this.bounds.indices) {
       val w = this.getWidth(i)
       if (maxWidth < w) maxWidth = w
     }
@@ -216,7 +211,7 @@ class ChangeableAttributedString(val g2: Graphics2D, aStrings: Array[AttributedS
 
   def getMaxAscent: Double = {
     var maxAscent = -1.0D
-    for (i <- 0 until this.bounds.length) {
+    for (i <- this.bounds.indices) {
       val a = this.getAscent(i)
       if (maxAscent < a) maxAscent = a
     }
@@ -225,7 +220,7 @@ class ChangeableAttributedString(val g2: Graphics2D, aStrings: Array[AttributedS
 
   def getMaxDescent: Double = {
     var maxDescent = -1.0D
-    for (i <- 0 until this.bounds.length) {
+    for (i <- this.bounds.indices) {
       val d = this.getDescent(i)
       if (maxDescent < d) maxDescent = d
     }
@@ -234,7 +229,7 @@ class ChangeableAttributedString(val g2: Graphics2D, aStrings: Array[AttributedS
 
   def getMaxHeight: Double = {
     var maxHeight = -1.0D
-    for (i <- 0 until this.bounds.length) {
+    for (i <- this.bounds.indices) {
       val h = this.getHeight(i)
       if (maxHeight < h) maxHeight = h
     }

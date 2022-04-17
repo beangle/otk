@@ -32,8 +32,12 @@ trait WordToImage {
   def maxAcceptedWordLength: Int
 }
 
-abstract class AbstractWordToImage(fontGenerator: FontGenerator, backgroundGenerator: BackgroundGenerator,
-                                   textPaster: TextPaster) extends WordToImage {
+abstract class AbstractWordToImage(fontGenerator: FontGenerator,
+                                   backgroundGenerator: BackgroundGenerator,
+                                   textPaster: TextPaster,
+                                   val minAcceptedWordLength: Int,
+                                   val maxAcceptedWordLength: Int) extends WordToImage {
+  require(minAcceptedWordLength < maxAcceptedWordLength && minAcceptedWordLength > 0)
 
   override def getImage(word: String): BufferedImage = {
     val aword = this.getAttributedString(word, this.checkWordLength(word))
@@ -54,14 +58,10 @@ abstract class AbstractWordToImage(fontGenerator: FontGenerator, backgroundGener
     if (word == null) throw new CaptchaException("null word")
     else {
       val wordLength = word.length
-      if (wordLength <= textPaster.maxAcceptedWordLength && wordLength >= textPaster.minAcceptedWordLength) wordLength
+      if (wordLength <= maxAcceptedWordLength && wordLength >= minAcceptedWordLength) wordLength
       else throw new CaptchaException("invalid length word")
     }
   }
-
-  def minAcceptedWordLength: Int = textPaster.minAcceptedWordLength
-
-  def maxAcceptedWordLength: Int = textPaster.maxAcceptedWordLength
 
   protected def pasteText(background: BufferedImage, attributedWord: AttributedString): BufferedImage = {
     this.textPaster.pasteText(background, attributedWord)
@@ -69,8 +69,8 @@ abstract class AbstractWordToImage(fontGenerator: FontGenerator, backgroundGener
 }
 
 class DeformedComposedWordToImage(fontGenerator: FontGenerator, backgroundGenerator: BackgroundGenerator,
-                                  textPaster: TextPaster)
-  extends AbstractWordToImage(fontGenerator, backgroundGenerator, textPaster) {
+                                  textPaster: TextPaster, minAcceptedWordLength: Int, maxAcceptedWordLength: Int)
+  extends AbstractWordToImage(fontGenerator, backgroundGenerator, textPaster, minAcceptedWordLength, maxAcceptedWordLength) {
 
   override def getImage(word: String): BufferedImage = {
     val background = this.backgroundGenerator.next()

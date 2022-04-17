@@ -21,22 +21,14 @@ import org.beangle.otk.captcha.core.image.ColorGenerator
 
 import java.awt.image.{BufferedImage, ImageObserver}
 import java.awt.{Color, Graphics2D, RenderingHints}
-import java.security.SecureRandom
 import java.text.AttributedString
-import java.util.Random
 
 trait TextPaster {
   def pasteText(var1: BufferedImage, var2: AttributedString): BufferedImage
-
-  def minAcceptedWordLength: Int
-
-  def maxAcceptedWordLength: Int
 }
 
-abstract class AbstractTextPaster(val minAcceptedWordLength: Int, val maxAcceptedWordLength: Int,
-                                  val colorGenerator: ColorGenerator, var manageColorPerGlyph: Boolean) extends TextPaster {
-  require(minAcceptedWordLength < maxAcceptedWordLength && minAcceptedWordLength > 0)
-
+class DecoratedTextPaster(val colorGenerator: ColorGenerator, var manageColorPerGlyph: Boolean= false)
+  extends TextPaster {
   protected def copyBackground(background: BufferedImage) = {
     new BufferedImage(background.getWidth, background.getHeight, background.getType)
   }
@@ -47,12 +39,6 @@ abstract class AbstractTextPaster(val minAcceptedWordLength: Int, val maxAccepte
     pie.setColor(this.colorGenerator.next())
     pie
   }
-}
-
-class DecoratedRandomTextPaster(minAcceptedWordLength: Int, maxAcceptedWordLength: Int,
-                                colorGenerator: ColorGenerator, manageColorPerGlyph: Boolean = false)
-  extends AbstractTextPaster(minAcceptedWordLength, maxAcceptedWordLength, colorGenerator, manageColorPerGlyph) {
-  final protected val kerning = 20
 
   override def pasteText(background: BufferedImage, attributedWord: AttributedString): BufferedImage = {
     val out = this.copyBackground(background)

@@ -37,13 +37,12 @@ object GmailEngine {
     val fontSize = 21
 
     val dictionnaryWords = new WordGenerator.ComposeDictionary(DictionaryReader.bundle("todd"))
-    val randomPaster = new DecoratedRandomTextPaster(minWordLength, maxWordLength,
-      ColorGenerator.random(Array(new Color(23, 170, 27), new Color(220, 34, 11), new Color(23, 67, 172))))
+    val textPaster = new DecoratedTextPaster(ColorGenerator.random(Array(new Color(23, 170, 27), new Color(220, 34, 11), new Color(23, 67, 172))))
     val background = new UniColorBackgroundGenerator(imageWidth, imageHeight, Color.white)
     val font = new RandomFontGenerator(fontSize, fontSize,
       Array(new Font("nyala", 1, fontSize), new Font("Bell MT", 0, fontSize),
         new Font("Credit valley", 1, fontSize)))
-    val word2image = new DeformedComposedWordToImage(font, background, randomPaster)
+    val word2image = new DeformedComposedWordToImage(font, background, textPaster,minWordLength, maxWordLength)
     new GmailEngine(dictionnaryWords, word2image)
   }
 }

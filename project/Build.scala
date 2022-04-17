@@ -3,14 +3,14 @@ import sbt._
 import org.beangle.parent.Dependencies._
 
 object OtkDepends {
-  val commonsVer = "5.2.13"
-  val dataVer = "5.4.0"
+  val commonsVer = "5.2.15"
+  val dataVer = "5.4.2"
   val cdiVer = "0.3.5"
   val webVer = "0.0.6"
   val serializerVer= "0.0.23"
   val cacheVer= "0.0.26"
   val templateVer ="0.0.37"
-  val webmvcVer="0.4.9"
+  val webmvcVer="0.4.10"
   val securityVer="4.2.33"
   val docVer="0.0.10"
 
@@ -32,6 +32,4 @@ object OtkDepends {
   val b_webmvc_spring= "org.beangle.webmvc" %% "beangle-webmvc-spring" % webmvcVer
   val b_serializer_text = "org.beangle.serializer" %% "beangle-serializer-text" % serializerVer
   val b_doc_pdf = "org.beangle.doc" %% "beangle-doc-pdf" % docVer
-
-  val appDepends = Seq(commonsCore, logback_classic % "test", logback_core % "test", scalatest, webAction,cdiApi)
 }
