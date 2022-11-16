@@ -1,18 +1,16 @@
-import sbt.Keys._
 import sbt._
-import org.beangle.parent.Dependencies._
 
 object OtkDepends {
-  val commonsVer = "5.2.15"
-  val dataVer = "5.4.2"
-  val cdiVer = "0.3.5"
-  val webVer = "0.0.6"
-  val serializerVer= "0.0.23"
-  val cacheVer= "0.0.26"
-  val templateVer ="0.0.37"
-  val webmvcVer="0.4.10"
-  val securityVer="4.2.33"
-  val docVer="0.0.10"
+  val commonsVer = "5.4.2"
+  val dataVer = "5.5.6"
+  val cdiVer = "0.4.2"
+  val webVer = "0.3.5"
+  val serializerVer = "0.1.2"
+  val cacheVer = "0.1.2"
+  val templateVer = "0.1.2"
+  val webmvcVer = "0.7.1"
+  val securityVer = "4.3.3"
+  val docVer="0.1.2"
 
   val commonsCore = "org.beangle.commons" %% "beangle-commons-core" % commonsVer
   val commonsFile = "org.beangle.commons" %% "beangle-commons-file" % commonsVer
@@ -28,8 +26,7 @@ object OtkDepends {
   val webAction = "org.beangle.web" %% "beangle-web-action" % webVer
   val webServlet = "org.beangle.web" %% "beangle-web-servlet" % webVer
   val webmvcCore= "org.beangle.webmvc" %% "beangle-webmvc-core" % webmvcVer
-  val webmvcFreemarker= "org.beangle.webmvc" %% "beangle-webmvc-freemarker" % webmvcVer
-  val b_webmvc_spring= "org.beangle.webmvc" %% "beangle-webmvc-spring" % webmvcVer
+  val webmvcSupport= "org.beangle.webmvc" %% "beangle-webmvc-support" % webmvcVer
   val b_serializer_text = "org.beangle.serializer" %% "beangle-serializer-text" % serializerVer
   val b_doc_pdf = "org.beangle.doc" %% "beangle-doc-pdf" % docVer
 }

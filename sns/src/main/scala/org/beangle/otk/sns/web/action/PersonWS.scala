@@ -41,6 +41,7 @@ class PersonWS extends ActionSupport with ServletSupport with Initializing {
       null
   }
 
+  @response
   @mapping("id/{idcard}")
   def id(@param("idcard") idcard: String): Properties = {
     val rs = IdHelper.resolve(idcard)

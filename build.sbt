@@ -1,10 +1,9 @@
 import OtkDepends._
 import org.beangle.parent.Dependencies._
 import org.beangle.parent.Settings._
-import org.beangle.tools.sbt.UndertowPlugin
 
 ThisBuild / organization := "org.beangle.otk"
-ThisBuild / version := "0.0.5-SNAPSHOT"
+ThisBuild / version := "0.0.5"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
@@ -35,14 +34,14 @@ lazy val captcha = (project in file("captcha"))
   .settings(
     name := "beangle-otk-captcha",
     common,
-    libraryDependencies ++= Seq(b_webmvc_spring, b_cache_caffeine, scalatest)
+    libraryDependencies ++= Seq(webmvcSupport, b_cache_caffeine, scalatest)
   )
 
 lazy val sns = (project in file("sns"))
   .settings(
     name := "beangle-otk-sns",
     common,
-    libraryDependencies ++= Seq(b_webmvc_spring, pinyin4j, scalatest),
+    libraryDependencies ++= Seq(webmvcSupport, pinyin4j, scalatest),
     libraryDependencies ++= Seq(b_serializer_text)
   )
 
@@ -50,18 +49,18 @@ lazy val doc = (project in file("doc"))
   .settings(
     name := "beangle-otk-doc",
     common,
-    libraryDependencies ++= Seq(b_webmvc_spring, b_doc_pdf)
+    libraryDependencies ++= Seq(webmvcSupport, b_doc_pdf)
   )
 
 lazy val code = (project in file("code"))
   .settings(
     name := "beangle-otk-code",
     common,
-    libraryDependencies ++= Seq(b_webmvc_spring, "com.google.zxing" % "javase" % "3.4.1")
+    libraryDependencies ++= Seq(webmvcSupport, "com.google.zxing" % "javase" % "3.5.1")
   )
 
 lazy val ws = (project in file("ws"))
-  .enablePlugins(WarPlugin, UndertowPlugin)
+  .enablePlugins(WarPlugin, TomcatPlugin)
   .settings(
     name := "beangle-otk-ws",
     common,
