@@ -1,9 +1,9 @@
-import OtkDepends._
-import org.beangle.parent.Dependencies._
-import org.beangle.parent.Settings._
+import OtkDepends.*
+import org.beangle.parent.Dependencies.*
+import org.beangle.parent.Settings.*
 
 ThisBuild / organization := "org.beangle.otk"
-ThisBuild / version := "0.0.7-SNAPSHOT"
+ThisBuild / version := "0.0.7"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
@@ -28,7 +28,7 @@ val pinyin4j = "com.belerweb" % "pinyin4j" % "2.5.1"
 
 lazy val root = (project in file("."))
   .settings()
-  .aggregate(captcha, doc, sns, code, ws)
+  .aggregate(captcha, doc, sns, code, sys, ws)
 
 lazy val captcha = (project in file("captcha"))
   .settings(
@@ -43,6 +43,13 @@ lazy val sns = (project in file("sns"))
     common,
     libraryDependencies ++= Seq(webmvcSupport, pinyin4j, scalatest),
     libraryDependencies ++= Seq(b_serializer_text)
+  )
+
+lazy val sys = (project in file("sys"))
+  .settings(
+    name := "beangle-otk-sys",
+    common,
+    libraryDependencies ++= Seq(webmvcSupport, scalatest)
   )
 
 lazy val doc = (project in file("doc"))
@@ -65,6 +72,6 @@ lazy val ws = (project in file("ws"))
     name := "beangle-otk-ws",
     common,
     libraryDependencies ++= Seq(logback_classic, logback_core)
-  ).dependsOn(captcha, doc, sns, code)
+  ).dependsOn(captcha, doc, sns, sys, code)
 
 publish / skip := true

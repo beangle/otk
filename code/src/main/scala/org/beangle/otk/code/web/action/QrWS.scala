@@ -18,9 +18,8 @@
 package org.beangle.otk.code.web.action
 
 import com.google.zxing.client.j2se.MatrixToImageWriter
-import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
-import com.google.zxing.{BarcodeFormat, DecodeHintType, EncodeHintType, MultiFormatWriter}
+import com.google.zxing.{BarcodeFormat, EncodeHintType, MultiFormatWriter}
 import org.beangle.commons.lang.Charsets
 import org.beangle.commons.net.http.HttpUtils
 import org.beangle.otk.code.web.helper.RangeChecker
@@ -30,9 +29,8 @@ import org.beangle.web.action.view.{Stream, View}
 
 import java.awt.BasicStroke
 import java.awt.image.BufferedImage
-import java.io.{ByteArrayInputStream, ByteArrayOutputStream, File}
-import java.net.{URL, URLDecoder}
-import java.time.Instant
+import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
+import java.net.URLDecoder
 import java.util as ju
 import javax.imageio.ImageIO
 
