@@ -1,16 +1,16 @@
 import sbt._
 
 object OtkDepends {
-  val commonsVer = "5.5.8"
-  val dataVer = "5.6.22"
-  val cdiVer = "0.5.4"
-  val webVer = "0.4.5"
-  val serializerVer = "0.1.4"
-  val cacheVer = "0.1.4"
-  val templateVer = "0.1.6"
-  val webmvcVer = "0.9.7"
-  val securityVer = "4.3.9"
-  val docVer="0.1.6"
+  val commonsVer = "5.6.0"
+  val dataVer = "5.7.0"
+  val cdiVer = "0.5.5"
+  val webVer = "0.4.6"
+  val serializerVer = "0.1.5"
+  val cacheVer = "0.1.5"
+  val templateVer = "0.1.7"
+  val webmvcVer = "0.9.9"
+  val securityVer = "4.3.11"
+  val docVer="0.1.7"
 
   val commonsCore = "org.beangle.commons" %% "beangle-commons-core" % commonsVer
   val commonsFile = "org.beangle.commons" %% "beangle-commons-file" % commonsVer
