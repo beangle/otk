@@ -18,29 +18,46 @@
 package org.beangle.otk.doc.web.action
 
 import com.itextpdf.text.pdf.PdfWriter
+import org.beangle.commons.bean.Properties
 import org.beangle.commons.codec.digest.Digests
-import org.beangle.doc.pdf.{Encryptor, SPD}
+import org.beangle.doc.core.{PageMargin, PrintOptions}
+import org.beangle.doc.pdf.{Encryptor, SPDConverter}
 import org.beangle.web.action.annotation.*
+import org.beangle.web.action.context.Params
 import org.beangle.web.action.support.ActionSupport
-import org.beangle.web.action.view.{Stream, View}
+import org.beangle.web.action.view.{Status, Stream, View}
 
 import java.io.File
-import java.net.URL
-import java.time.Instant
+import java.net.URI
 
 class PdfWS extends ActionSupport {
 
+  var converter: SPDConverter = _
+
   @mapping("")
   def index(@param("url") url: String): View = {
+    if null == converter then converter = SPDConverter.getInstance()
     val pdf = File.createTempFile("doc", ".pdf")
-    SPD.convertURL(new URL(url), pdf)
-    val userPassword = get("password")
-    val ownerPassword = get("ownerPassword").getOrElse(Digests.md5Hex("Cannot change it."))
-    Encryptor.encrypt(pdf, userPassword, ownerPassword, PdfWriter.ALLOW_PRINTING)
-    get("fileName") match {
-      case Some(f) => Stream(pdf, f)
-      case None => Stream(pdf)
+    val options = PrintOptions.defaultOptions
+
+    val params = Params.sub("options")
+    params foreach { case (k, v) =>
+      if (k == "margin") {
+        options.margin = PageMargin(v.toString)
+      } else {
+        Properties.copy(options, k, v)
+      }
     }
+    if converter.convert(URI.create(url), pdf, options) then
+      val userPassword = get("password")
+      val ownerPassword = get("ownerPassword").getOrElse(Digests.md5Hex("Cannot change it."))
+      Encryptor.encrypt(pdf, userPassword, ownerPassword, PdfWriter.ALLOW_PRINTING)
+      get("fileName") match {
+        case Some(f) => Stream(pdf, f)
+        case None => Stream(pdf)
+      }
+    else
+      Status(500)
   }
 
 }
