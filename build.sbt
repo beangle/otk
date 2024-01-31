@@ -3,7 +3,7 @@ import org.beangle.parent.Dependencies.*
 import org.beangle.parent.Settings.*
 
 ThisBuild / organization := "org.beangle.otk"
-ThisBuild / version := "0.0.10-SNAPSHOT"
+ThisBuild / version := "0.0.10"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
@@ -21,7 +21,7 @@ ThisBuild / developers := List(
   )
 )
 
-ThisBuild / description := "beangle Starter"
+ThisBuild / description := "Beangle online toolkit"
 ThisBuild / homepage := Some(url("http://beangle.github.io/otk/index.html"))
 
 val pinyin4j = "com.belerweb" % "pinyin4j" % "2.5.1"
