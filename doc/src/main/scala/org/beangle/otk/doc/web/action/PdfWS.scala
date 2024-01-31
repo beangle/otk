@@ -17,7 +17,6 @@
 
 package org.beangle.otk.doc.web.action
 
-import com.itextpdf.text.pdf.PdfWriter
 import org.beangle.commons.bean.Properties
 import org.beangle.commons.codec.digest.Digests
 import org.beangle.doc.core.{PageMargin, PrintOptions}
@@ -51,7 +50,7 @@ class PdfWS extends ActionSupport {
     if converter.convert(URI.create(url), pdf, options) then
       val userPassword = get("password")
       val ownerPassword = get("ownerPassword").getOrElse(Digests.md5Hex("Cannot change it."))
-      Encryptor.encrypt(pdf, userPassword, ownerPassword, PdfWriter.ALLOW_PRINTING)
+      Encryptor.encrypt(pdf, userPassword, ownerPassword)
       get("fileName") match {
         case Some(f) => Stream(pdf, f)
         case None => Stream(pdf)
