@@ -1,32 +1,32 @@
 import sbt._
 
 object OtkDepends {
-  val commonsVer = "5.6.10"
-  val dataVer = "5.8.0"
-  val cdiVer = "0.6.2"
-  val webVer = "0.4.10"
-  val serializerVer = "0.1.8"
-  val cacheVer = "0.1.7"
-  val templateVer = "0.1.10"
-  val webmvcVer = "0.9.23"
-  val securityVer = "4.3.16"
-  val docVer="0.3.2"
+  val commonsVer = "5.6.15"
+  val jdbcVer = "1.0.0"
+  val dataVer = "5.8.9"
+  val cdiVer = "0.6.5"
+  val webVer = "0.4.11"
+  val serializerVer = "0.1.9"
+  val cacheVer = "0.1.8"
+  val templateVer = "0.1.14"
+  val webmvcVer = "0.9.26"
+  val securityVer = "4.3.19"
+  val idsVer = "0.3.16"
+  val eventVer = "0.0.4"
+  val docVer = "0.3.3"
 
-  val commonsCore = "org.beangle.commons" %% "beangle-commons-core" % commonsVer
-  val commonsFile = "org.beangle.commons" %% "beangle-commons-file" % commonsVer
-  val dataJdbc = "org.beangle.data" %% "beangle-data-jdbc" % dataVer
-  val dataOrm = "org.beangle.data" %% "beangle-data-orm" % dataVer
-  val dataTransfer = "org.beangle.data" %% "beangle-data-transfer" % dataVer
-  val cdiApi = "org.beangle.cdi" %% "beangle-cdi-api" % cdiVer
-  val cdiSpring = "org.beangle.cdi" %% "beangle-cdi-spring" % cdiVer
-  val cache_api = "org.beangle.cache" %% "beangle-cache-api" % cacheVer
-  val b_cache_caffeine = "org.beangle.cache" %% "beangle-cache-caffeine" % cacheVer
-  val templateApi = "org.beangle.template" %% "beangle-template-api" % templateVer
-  val templateFreemarker = "org.beangle.template" %% "beangle-template-freemarker" % templateVer
-  val webAction = "org.beangle.web" %% "beangle-web-action" % webVer
-  val webServlet = "org.beangle.web" %% "beangle-web-servlet" % webVer
-  val webmvcCore= "org.beangle.webmvc" %% "beangle-webmvc-core" % webmvcVer
-  val webmvcSupport= "org.beangle.webmvc" %% "beangle-webmvc-support" % webmvcVer
-  val b_serializer_text = "org.beangle.serializer" %% "beangle-serializer-text" % serializerVer
-  val b_doc_pdf = "org.beangle.doc" %% "beangle-doc-pdf" % docVer
+  val b_commons = "org.beangle.commons" % "beangle-commons" % commonsVer
+  val b_jdbc = "org.beangle.jdbc" % "beangle-jdbc" % jdbcVer
+  val b_model = "org.beangle.data" % "beangle-model" % dataVer
+  val b_cdi = "org.beangle.cdi" % "beangle-cdi" % cdiVer
+  val b_cache = "org.beangle.cache" % "beangle-cache" % cacheVer
+  val b_template = "org.beangle.template" % "beangle-template" % templateVer
+  val b_web = "org.beangle.web" % "beangle-web" % webVer
+  val b_webmvc = "org.beangle.webmvc" % "beangle-webmvc" % webmvcVer
+  val b_serializer = "org.beangle.serializer" % "beangle-serializer" % serializerVer
+  val b_security = "org.beangle.security" % "beangle-security" % securityVer
+  val b_ids = "org.beangle.ids" % "beangle-ids" % idsVer
+  val b_event = "org.beangle.event" % "beangle-event" % eventVer
+  val b_doc_transfer = "org.beangle.doc" % "beangle-doc-transfer" % docVer
+  val b_doc_pdf = "org.beangle.doc" % "beangle-doc-pdf" % docVer
 }

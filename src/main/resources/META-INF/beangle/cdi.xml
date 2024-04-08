@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<cdi>
+  <container>
+    <module class="org.beangle.otk.captcha.web.DefaultModule"/>
+    <module class="org.beangle.otk.code.web.DefaultModule"/>
+    <module class="org.beangle.otk.doc.web.DefaultModule"/>
+    <module class="org.beangle.otk.sns.web.DefaultModule"/>
+    <module class="org.beangle.otk.sys.web.DefaultModule"/>
+
+    <module class="org.beangle.serializer.text.DefaultModule"/>
+    <module class="org.beangle.serializer.json.DefaultModule"/>
+    <module class="org.beangle.serializer.xml.DefaultModule"/>
+  </container>
+
+</cdi>
