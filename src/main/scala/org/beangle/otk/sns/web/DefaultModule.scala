@@ -17,7 +17,7 @@
 
 package org.beangle.otk.sns.web
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.beangle.otk.sns.web.action.PersonWS
 
 class DefaultModule extends BindModule {

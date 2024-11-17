@@ -21,10 +21,10 @@ import org.beangle.commons.bean.Properties
 import org.beangle.commons.codec.digest.Digests
 import org.beangle.doc.core.{PageMargin, PrintOptions}
 import org.beangle.doc.pdf.{Encryptor, SPDConverter}
-import org.beangle.web.action.annotation.*
-import org.beangle.web.action.context.Params
-import org.beangle.web.action.support.ActionSupport
-import org.beangle.web.action.view.{Status, Stream, View}
+import org.beangle.webmvc.annotation.*
+import org.beangle.webmvc.context.Params
+import org.beangle.webmvc.support.ActionSupport
+import org.beangle.webmvc.view.{Status, Stream, View}
 
 import java.io.File
 import java.net.URI

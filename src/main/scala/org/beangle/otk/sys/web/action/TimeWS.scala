@@ -17,9 +17,9 @@
 
 package org.beangle.otk.sys.web.action
 
-import org.beangle.web.action.annotation.{mapping, response}
-import org.beangle.web.action.support.ActionSupport
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.annotation.{mapping, response}
+import org.beangle.webmvc.support.ActionSupport
+import org.beangle.webmvc.view.View
 
 import java.time.Instant
 

@@ -21,12 +21,13 @@ import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.google.zxing.{BarcodeFormat, EncodeHintType, MultiFormatWriter}
 import jakarta.servlet.http.HttpServletResponse
+import org.beangle.commons.activation.MediaTypes
 import org.beangle.commons.lang.Charsets
 import org.beangle.otk.code.web.helper.RangeChecker
-import org.beangle.web.action.annotation.*
-import org.beangle.web.action.context.ActionContext
-import org.beangle.web.action.support.ActionSupport
-import org.beangle.web.action.view.{Stream, View}
+import org.beangle.webmvc.annotation.*
+import org.beangle.webmvc.context.ActionContext
+import org.beangle.webmvc.support.ActionSupport
+import org.beangle.webmvc.view.{Stream, View}
 
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
 import java.net.URLDecoder
@@ -50,7 +51,7 @@ class BarWS extends ActionSupport {
       val image = MatrixToImageWriter.toBufferedImage(bitMatrix)
       val os = new ByteArrayOutputStream()
       ImageIO.write(image, "PNG", os)
-      Stream(new ByteArrayInputStream(os.toByteArray), "image/png", "barcode.png")
+      Stream(new ByteArrayInputStream(os.toByteArray),  MediaTypes.ImagePng, "barcode.png")
     } else {
       val res = ActionContext.current.response
       res.setContentType("text/html;charset=utf-8")

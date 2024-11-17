@@ -17,7 +17,7 @@
 
 package org.beangle.otk.code.web
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.beangle.otk.code.web.action.{BarWS, QrWS}
 
 class DefaultModule extends BindModule {

@@ -18,14 +18,14 @@
 package org.beangle.otk.sns.web.action
 
 import jakarta.servlet.http.HttpServletResponse
-import org.beangle.cache.CacheManager
+import org.beangle.commons.cache.CacheManager
 import org.beangle.commons.bean.Initializing
 import org.beangle.commons.collection.Properties
 import org.beangle.commons.lang.Strings
 import org.beangle.otk.sns.web.helper.{IdHelper, PinyinHelper}
-import org.beangle.web.action.annotation.{action, mapping, param, response}
-import org.beangle.web.action.support.{ActionSupport, ServletSupport}
-import org.beangle.web.action.view.{Status, Stream, View}
+import org.beangle.webmvc.annotation.{action, mapping, param, response}
+import org.beangle.webmvc.support.{ActionSupport, ServletSupport}
+import org.beangle.webmvc.view.{Status, Stream, View}
 
 import java.io.InputStream
 import java.net.URLDecoder

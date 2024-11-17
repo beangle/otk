@@ -17,7 +17,7 @@
 
 package org.beangle.otk.doc.web
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.beangle.otk.doc.web.action.PdfWS
 
 class DefaultModule extends BindModule {

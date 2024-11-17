@@ -20,12 +20,13 @@ package org.beangle.otk.code.web.action
 import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.google.zxing.{BarcodeFormat, EncodeHintType, MultiFormatWriter}
+import org.beangle.commons.activation.MediaTypes
 import org.beangle.commons.lang.Charsets
 import org.beangle.commons.net.http.HttpUtils
 import org.beangle.otk.code.web.helper.RangeChecker
-import org.beangle.web.action.annotation.*
-import org.beangle.web.action.support.ActionSupport
-import org.beangle.web.action.view.{Stream, View}
+import org.beangle.webmvc.annotation.*
+import org.beangle.webmvc.support.ActionSupport
+import org.beangle.webmvc.view.{Stream, View}
 
 import java.awt.BasicStroke
 import java.awt.image.BufferedImage
@@ -53,7 +54,7 @@ class QrWS extends ActionSupport {
     }
     val os = new ByteArrayOutputStream()
     ImageIO.write(image, "PNG", os)
-    Stream(new ByteArrayInputStream(os.toByteArray), "image/png", "qrcode.png")
+    Stream(new ByteArrayInputStream(os.toByteArray), MediaTypes.ImagePng, "qrcode.png")
   }
 
   private def addLogo(qrImg: BufferedImage, logoBytes: Array[Byte]): Unit = {

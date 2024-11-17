@@ -17,7 +17,7 @@
 
 package org.beangle.otk.captcha.web
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.beangle.otk.captcha.web.action.IndexWS
 import org.beangle.cache.caffeine.CaffeineCacheManager
 class DefaultModule extends BindModule {

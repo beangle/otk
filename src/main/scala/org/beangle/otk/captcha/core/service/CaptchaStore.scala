@@ -17,7 +17,7 @@
 
 package org.beangle.otk.captcha.core.service
 
-import org.beangle.cache.Cache
+import org.beangle.commons.cache.Cache
 import org.beangle.otk.captcha.core.Captcha
 
 import java.util as ju

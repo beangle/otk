@@ -17,7 +17,7 @@
 
 package org.beangle.otk.sys.web
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.beangle.otk.sys.web.action.TimeWS
 
 class DefaultModule extends BindModule {

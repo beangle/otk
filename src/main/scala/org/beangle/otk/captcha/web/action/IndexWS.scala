@@ -17,15 +17,15 @@
 
 package org.beangle.otk.captcha.web.action
 
-import org.beangle.cache.CacheManager
+import org.beangle.commons.cache.CacheManager
+import org.beangle.commons.activation.MediaTypes
 import org.beangle.commons.bean.Initializing
 import org.beangle.commons.lang.Strings
-import org.beangle.otk.captcha.core.Captcha
 import org.beangle.otk.captcha.core.image.GmailEngine
 import org.beangle.otk.captcha.core.service.{CaptchaService, CaptchaStore, DefaultCaptchaService}
-import org.beangle.web.action.annotation.{action, mapping, param, response}
-import org.beangle.web.action.support.{ActionSupport, ServletSupport}
-import org.beangle.web.action.view.{Status, Stream, View}
+import org.beangle.webmvc.annotation.{action, mapping, param}
+import org.beangle.webmvc.support.{ActionSupport, ServletSupport}
+import org.beangle.webmvc.view.{Status, Stream, View}
 
 import java.io.InputStream
 
@@ -45,7 +45,7 @@ class IndexWS extends ActionSupport with ServletSupport with Initializing {
     if (Strings.isEmpty(id) || id.length != 50) {
       Status.NotFound
     } else {
-      Stream(captchaService.getChallenge(id), "image/jpeg", id + ".jpg")
+      Stream(captchaService.getChallenge(id), MediaTypes.ImageJpeg, id + ".jpg")
     }
   }
 
