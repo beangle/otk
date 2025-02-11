@@ -27,10 +27,9 @@ import org.beangle.webmvc.annotation.{action, mapping, param, response}
 import org.beangle.webmvc.support.{ActionSupport, ServletSupport}
 import org.beangle.webmvc.view.{Status, Stream, View}
 
-import java.io.InputStream
 import java.net.URLDecoder
 
-class PersonWS extends ActionSupport with ServletSupport with Initializing {
+class PersonWS extends ActionSupport, ServletSupport, Initializing {
 
   @mapping("pinyin/{name}")
   def pinyinName(@param("name") name: String): View = {

@@ -15,24 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.otk.sys.web.action
+package org.beangle.otk.lang.web.action
 
-import org.beangle.webmvc.annotation.{mapping, response}
-import org.beangle.webmvc.support.ActionSupport
+import org.beangle.otk.lang.service.EnNameChecker
+import org.beangle.webmvc.annotation.response
+import org.beangle.webmvc.support.{ActionSupport, ServletSupport}
 import org.beangle.webmvc.view.View
 
-import java.time.Instant
+class EnWS extends ActionSupport, ServletSupport {
 
-/**
- * 当前时间
- */
-class TimeWS extends ActionSupport {
+  val checker = new EnNameChecker()
 
-  def now(): View = {
-    raw(System.currentTimeMillis())
+  def check(): View = {
+    forward()
   }
 
-  def iso(): View = {
-    raw(Instant.now.toString)
+  @response
+  def name(): Any = {
+    val names = getAll("name", classOf[String])
+    checker.check(names)
   }
 }

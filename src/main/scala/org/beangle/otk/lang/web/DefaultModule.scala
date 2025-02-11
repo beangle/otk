@@ -15,24 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.otk.sys.web.action
+package org.beangle.otk.lang.web
 
-import org.beangle.webmvc.annotation.{mapping, response}
-import org.beangle.webmvc.support.ActionSupport
-import org.beangle.webmvc.view.View
+import org.beangle.commons.cdi.BindModule
+import org.beangle.otk.lang.web.action.EnWS
+import org.beangle.otk.sns.web.action.PersonWS
 
-import java.time.Instant
-
-/**
- * 当前时间
- */
-class TimeWS extends ActionSupport {
-
-  def now(): View = {
-    raw(System.currentTimeMillis())
-  }
-
-  def iso(): View = {
-    raw(Instant.now.toString)
+class DefaultModule extends BindModule {
+  protected override def binding(): Unit = {
+    bind(classOf[EnWS])
   }
 }

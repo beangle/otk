@@ -30,7 +30,7 @@ import org.beangle.webmvc.view.{Status, Stream, View}
 import java.io.InputStream
 
 @action("")
-class IndexWS extends ActionSupport with ServletSupport with Initializing {
+class IndexWS extends ActionSupport , ServletSupport , Initializing {
 
   var cacheManager: CacheManager = _
   var captchaService: CaptchaService[InputStream, String] = _
