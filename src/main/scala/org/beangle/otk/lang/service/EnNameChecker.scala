@@ -24,7 +24,13 @@ import org.languagetool.{JLanguageTool, Languages}
 /** 英文名检查器
  */
 class EnNameChecker {
-  val preps = Set("of", "for", "a", "an", "with", "on", "in", "at")
+  val preps = Set("of", "to", "as", "by", "on", "in", "about", "from", "with", "for", "like", "up", "down", "under",
+    "behind", "over", "beyond", "between", "below", "above", "including", "except", "without", "into", "onto",
+    "through", "before", "after", "since", "off", "during", "beside", "besides", "past", "till", "until", "opposite",
+    "near", "towards", "but", "among", "along", "against", "across", "around", "round", "next", "despite", "than",
+    "outside", "inside",
+    "a", "an", "at", "and")
+
   val symbols = Set('(', '&', '"')
   private val lang = Languages.getLanguageForShortCode("en-US")
   private val msgs = Map("It appears that a white space is missing." -> "少一个空格",
@@ -38,7 +44,7 @@ class EnNameChecker {
     enNames foreach { enName =>
       val formatOK = isFormatCorrect(enName)
       if (!formatOK._1) {
-        rs.put(enName, s"格式错误:${formatOK._2}")
+        rs.put(enName, s"大小写错误:${formatOK._2}")
       } else {
         val tool = new JLanguageTool(lang)
         val matches = tool.check(enName)
@@ -75,7 +81,8 @@ class EnNameChecker {
     var errors = 0
     parts foreach { part =>
       val lp = part.toLowerCase
-      if (parts.contains(lp)) {
+      //如果是介词
+      if (preps.contains(lp)) {
         if (lp == part) {
           names.addOne(part)
         } else {

@@ -27,7 +27,7 @@ ThisBuild / homepage := Some(url("http://beangle.github.io/otk/index.html"))
 
 val pinyin4j = "com.belerweb" % "pinyin4j" % "2.5.1"
 val zxing = "com.google.zxing" % "javase" % "3.5.3"
-val language_en = "org.languagetool" % "language-en" % "6.5"
+val language_en = "org.languagetool" % "language-en" % "6.6"
 val guava = "com.google.guava" % "guava" % "33.2.1-jre"
 
 lazy val root = (project in file("."))

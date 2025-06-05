@@ -17,22 +17,26 @@
 
 package org.beangle.otk.lang.web.action
 
+import org.beangle.commons.json.{JsonArray, JsonObject}
 import org.beangle.otk.lang.service.EnNameChecker
 import org.beangle.webmvc.annotation.response
 import org.beangle.webmvc.support.{ActionSupport, ServletSupport}
-import org.beangle.webmvc.view.View
 
 class EnWS extends ActionSupport, ServletSupport {
 
   val checker = new EnNameChecker()
 
-  def check(): View = {
-    forward()
-  }
-
   @response
-  def name(): Any = {
+  def check(): Any = {
     val names = getAll("name", classOf[String])
-    checker.check(names)
+    val rs = new JsonObject
+    val msgs = checker.check(names)
+    rs.add("success", true)
+    if (msgs.nonEmpty) {
+      rs.add("success", false)
+      val data = new JsonArray(msgs.values.toArray)
+      rs.add("data", data)
+    }
+    rs
   }
 }
