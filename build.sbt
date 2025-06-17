@@ -35,7 +35,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "beangle-otk-ws",
     common,
-    libraryDependencies ++= Seq(b_webmvc, b_cache, b_serializer, b_doc_pdf),
+    libraryDependencies ++= Seq(b_webmvc, b_cache, b_serializer, b_doc_pdf, b_template),
     libraryDependencies ++= Seq(pinyin4j, zxing, scalatest),
     libraryDependencies ++= Seq(spring_context, spring_beans, caffeine),
     libraryDependencies ++= Seq(logback_classic, logback_core),
