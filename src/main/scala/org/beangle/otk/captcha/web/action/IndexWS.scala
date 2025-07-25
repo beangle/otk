@@ -17,9 +17,9 @@
 
 package org.beangle.otk.captcha.web.action
 
-import org.beangle.commons.cache.CacheManager
 import org.beangle.commons.activation.MediaTypes
 import org.beangle.commons.bean.Initializing
+import org.beangle.commons.cache.CacheManager
 import org.beangle.commons.lang.Strings
 import org.beangle.otk.captcha.core.image.GmailEngine
 import org.beangle.otk.captcha.core.service.{CaptchaService, CaptchaStore, DefaultCaptchaService}
@@ -30,7 +30,7 @@ import org.beangle.webmvc.view.{Status, Stream, View}
 import java.io.InputStream
 
 @action("")
-class IndexWS extends ActionSupport , ServletSupport , Initializing {
+class IndexWS extends ActionSupport, ServletSupport, Initializing {
 
   var cacheManager: CacheManager = _
   var captchaService: CaptchaService[InputStream, String] = _
@@ -59,7 +59,6 @@ class IndexWS extends ActionSupport , ServletSupport , Initializing {
     else
       response.getWriter.write("mismatch")
       Status.NotFound
-
   }
 
 }

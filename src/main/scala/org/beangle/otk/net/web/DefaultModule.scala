@@ -15,17 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.otk.captcha.web
+package org.beangle.otk.net.web
 
-import org.beangle.cache.caffeine.CaffeineCacheManager
+import org.beangle.cache.redis.{JedisPoolFactory, RedisCacheManager}
 import org.beangle.commons.cdi.BindModule
-import org.beangle.otk.captcha.web.action.IndexWS
+import org.beangle.commons.io.DefaultBinarySerializer
+import org.beangle.otk.config.Config
+import org.beangle.otk.net.service.ShortURLGenerator
+import org.beangle.otk.net.web.action.UrlWS
 
 class DefaultModule extends BindModule {
   protected override def binding(): Unit = {
-    bind("cacheManager.captcha", classOf[CaffeineCacheManager]).constructor(true)
-      .property("ttl", 5 * 60).property("tti", 5 * 60) //five minutes
+    bind("jedis.Factory", classOf[JedisPoolFactory]).constructor(Config.Redis.conf)
+    bind("CacheManager.redis", classOf[RedisCacheManager]).constructor(ref("jedis.Factory"), DefaultBinarySerializer, true)
+      .property("ttl", 7 * 24 * 60 * 60) //7 days
 
-    bind(classOf[IndexWS]).property("cacheManager", ref("cacheManager.captcha"))
+    bind(classOf[ShortURLGenerator]).property("cacheManager", ref("CacheManager.redis"))
+    bind(classOf[UrlWS])
   }
 }
