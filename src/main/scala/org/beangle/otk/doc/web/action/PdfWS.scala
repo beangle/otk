@@ -29,6 +29,8 @@ import org.beangle.webmvc.view.{Status, Stream, View}
 import java.io.File
 import java.net.URI
 
+/** Convert a html url to pdf
+ */
 class PdfWS extends ActionSupport {
 
   var converter: SPDConverter = _
