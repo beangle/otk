@@ -22,6 +22,8 @@ import org.beangle.otk.lang.service.EnNameChecker
 import org.beangle.webmvc.annotation.response
 import org.beangle.webmvc.support.{ActionSupport, ServletSupport}
 
+/** 英语语法检查
+ */
 class EnWS extends ActionSupport, ServletSupport {
 
   val checker = new EnNameChecker()
