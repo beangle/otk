@@ -14,7 +14,7 @@ object OtkDepends {
   val beangle_security = "org.beangle.security" % "beangle-security" % "4.3.30"
   val beangle_ids = "org.beangle.ids" % "beangle-ids" % "0.3.25"
   val beangle_event = "org.beangle.event" % "beangle-event" % "0.1.2"
-  val beangle_doc_transfer = "org.beangle.doc" % "beangle-doc-transfer" % "0.4.15"
-  val beangle_doc_pdf = "org.beangle.doc" % "beangle-doc-pdf" % "0.4.15"
-  val beangle_doc_excel = "org.beangle.doc" % "beangle-doc-excel" % "0.4.15"
+  val beangle_doc_transfer = "org.beangle.doc" % "beangle-doc-transfer" % "0.4.16"
+  val beangle_doc_pdf = "org.beangle.doc" % "beangle-doc-pdf" % "0.4.16"
+  val beangle_doc_excel = "org.beangle.doc" % "beangle-doc-excel" % "0.4.16"
 }
