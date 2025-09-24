@@ -8,6 +8,7 @@
     <module class="org.beangle.otk.sys.web.DefaultModule"/>
     <module class="org.beangle.otk.lang.web.DefaultModule"/>
     <module class="org.beangle.otk.net.web.DefaultModule"/>
+    <module class="org.beangle.otk.security.web.DefaultModule"/>
 
     <module class="org.beangle.serializer.text.DefaultModule"/>
     <module class="org.beangle.serializer.json.DefaultModule"/>

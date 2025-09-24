@@ -1,4 +1,5 @@
 import OtkDepends.*
+import org.beangle.build.sbt.SnapshotPlugin.autoImport.{snapshotCredentials, snapshotRepoUrl}
 import org.beangle.parent.Dependencies.*
 import org.beangle.parent.Settings.*
 import sbt.Keys.libraryDependencies
@@ -35,6 +36,8 @@ lazy val root = (project in file("."))
   .settings(
     name := "beangle-otk-ws",
     common,
+    snapshotCredentials := Path.userHome / ".sbt" / "snapshot_credentials",
+    snapshotRepoUrl := "http://sas.openurp.net/sas/repo/snapshot/upload/{fileName}",
     libraryDependencies ++= Seq(beangle_webmvc, beangle_cache, beangle_serializer, beangle_template),
     libraryDependencies ++= Seq(beangle_doc_pdf, beangle_doc_excel),
     libraryDependencies ++= Seq(pinyin4j, zxing, scalatest, jedis),
