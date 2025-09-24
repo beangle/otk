@@ -30,7 +30,7 @@ class PasswordWS extends ActionSupport {
   @response
   def generate(): String = {
     var len = getInt("len", 10)
-    if (len < 0) len = 10
+    if (len <= 0) len = 10
     else if (len > 64) len = 64
 
     val includeUpper = getBoolean("upper", true)
