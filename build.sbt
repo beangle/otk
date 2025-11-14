@@ -5,7 +5,7 @@ import org.beangle.parent.Settings.*
 import sbt.Keys.libraryDependencies
 
 ThisBuild / organization := "org.beangle.otk"
-ThisBuild / version := "0.0.20-SNAPSHOT"
+ThisBuild / version := "0.0.20"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
