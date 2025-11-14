@@ -27,8 +27,8 @@ ThisBuild / description := "Beangle online toolkit"
 ThisBuild / homepage := Some(url("http://beangle.github.io/otk/index.html"))
 
 val pinyin4j = "com.belerweb" % "pinyin4j" % "2.5.1"
-val zxing = "com.google.zxing" % "javase" % "3.5.3"
-val language_en = "org.languagetool" % "language-en" % "6.6"
+val zxing = "com.google.zxing" % "javase" % "3.5.4"
+val language_en = "org.languagetool" % "language-en" % "6.7"
 val guava = "com.google.guava" % "guava" % "33.2.1-jre"
 
 lazy val root = (project in file("."))
@@ -39,9 +39,9 @@ lazy val root = (project in file("."))
     snapshotCredentials := Path.userHome / ".sbt" / "snapshot_credentials",
     snapshotRepoUrl := "http://sas.openurp.net/sas/repo/snapshot/upload/{fileName}",
     libraryDependencies ++= Seq(beangle_webmvc, beangle_cache, beangle_serializer, beangle_template),
-    libraryDependencies ++= Seq(beangle_doc_pdf, beangle_doc_excel),
+    libraryDependencies ++= Seq(beangle_doc_pdf, beangle_doc_excel, beangle_cdi),
     libraryDependencies ++= Seq(pinyin4j, zxing, scalatest, jedis),
     libraryDependencies ++= Seq(spring_context, spring_beans, caffeine),
     libraryDependencies ++= Seq(logback_classic, logback_core),
-    libraryDependencies ++= Seq(language_en, guava)
+    libraryDependencies ++= Seq(language_en, guava, beangle_config)
   )
