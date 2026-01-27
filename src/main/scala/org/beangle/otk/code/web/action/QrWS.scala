@@ -48,7 +48,7 @@ class QrWS extends ActionSupport {
     val bitMatrix = new MultiFormatWriter().encode(decoded, BarcodeFormat.QR_CODE, size, size, hints)
     val image = MatrixToImageWriter.toBufferedImage(bitMatrix)
     get("logo") foreach { url =>
-      val rs = HttpUtils.getData(url)
+      val rs = HttpUtils.get(url)
       if rs.isOk then
         addLogo(image, rs.content.asInstanceOf[Array[Byte]])
     }
