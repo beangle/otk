@@ -25,6 +25,5 @@ class DefaultModule extends BindModule {
   protected override def binding(): Unit = {
     bind(classOf[PdfWS])
     bind(classOf[ExcelWS])
-    bind(classOf[LibreOfficeConverter])
   }
 }

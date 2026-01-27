@@ -17,11 +17,11 @@
 
 package org.beangle.otk.doc.web.action
 
-import org.beangle.commons.bean.Properties
+import org.beangle.commons.bean.{Disposable, Properties}
 import org.beangle.commons.codec.digest.Digests
 import org.beangle.commons.net.http.HttpUtils
 import org.beangle.doc.core.{PageMargin, PrintOptions}
-import org.beangle.doc.office.LibreOfficeConverter
+import org.beangle.doc.office.{LibreOfficeConverter, LibreOfficeLauncher}
 import org.beangle.doc.pdf.{Encryptor, SPDConverter}
 import org.beangle.webmvc.annotation.*
 import org.beangle.webmvc.context.Params
@@ -33,14 +33,24 @@ import java.net.URI
 
 /** Convert a html url to pdf
  */
-class PdfWS extends ActionSupport {
+class PdfWS extends ActionSupport, Disposable {
 
   var htmlConverter: SPDConverter = _
 
-  var doceConverter: LibreOfficeConverter = _
+  var docConverter: Option[LibreOfficeConverter] = None
 
   @mapping("")
   def index(@param("url") url: String): View = {
+    val qIdx = url.indexOf('?')
+    val fileUrl = if (qIdx < 0) url else url.substring(0, qIdx)
+    if (fileUrl.endsWith(".doc") || fileUrl.endsWith(".docx")) {
+      convertDocToPdf(url)
+    } else {
+      convertHtmlToPdf(url)
+    }
+  }
+
+  private def convertHtmlToPdf(url: String): View = {
     if null == htmlConverter then htmlConverter = SPDConverter.getInstance()
     val pdf = File.createTempFile("doc", ".pdf")
     val options = PrintOptions.defaultOptions
@@ -70,11 +80,22 @@ class PdfWS extends ActionSupport {
    * @param url
    * @return
    */
-  def doc(@param("url") url: String): View = {
+  private def convertDocToPdf(url: String): View = {
+    if (docConverter.isEmpty) {
+      if (LibreOfficeLauncher.findSoffice().isEmpty) {
+        error("Cannot find libreoffice in server,Doc to Pdf converter need it.")
+      } else {
+        val ct = new LibreOfficeConverter
+        ct.processCount = Math.min(4, Runtime.getRuntime.availableProcessors())
+        ct.init()
+        docConverter = Some(ct)
+      }
+    }
+
     val doc = File.createTempFile("doc", ".docx")
     val pdf = File.createTempFile("doc", ".pdf")
     if (HttpUtils.download(url, doc)) {
-      doceConverter.convertToPdf(doc, pdf)
+      docConverter.get.convertToPdf(doc, pdf)
       Stream(pdf).cleanup(() =>
         doc.delete()
         pdf.delete()
@@ -84,4 +105,9 @@ class PdfWS extends ActionSupport {
     }
   }
 
+  override def destroy(): Unit = {
+    docConverter foreach { c =>
+      c.destroy()
+    }
+  }
 }

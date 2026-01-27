@@ -1,7 +1,7 @@
 import sbt.*
 
 object OtkDepends {
-  val beangle_commons = "org.beangle.commons" % "beangle-commons" % "5.8.1"
+  val beangle_commons = "org.beangle.commons" % "beangle-commons" % "5.8.2"
   val beangle_jdbc = "org.beangle.jdbc" % "beangle-jdbc" % "1.1.6"
   val beangle_model = "org.beangle.data" % "beangle-model" % "5.11.6"
   val beangle_cdi = "org.beangle.cdi" % "beangle-cdi" % "0.9.3"
