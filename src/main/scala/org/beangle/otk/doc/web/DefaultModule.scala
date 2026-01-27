@@ -18,11 +18,13 @@
 package org.beangle.otk.doc.web
 
 import org.beangle.commons.cdi.BindModule
+import org.beangle.doc.office.LibreOfficeConverter
 import org.beangle.otk.doc.web.action.{ExcelWS, PdfWS}
 
 class DefaultModule extends BindModule {
   protected override def binding(): Unit = {
     bind(classOf[PdfWS])
     bind(classOf[ExcelWS])
+    bind(classOf[LibreOfficeConverter])
   }
 }

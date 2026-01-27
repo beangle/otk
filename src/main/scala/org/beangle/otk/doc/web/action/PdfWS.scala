@@ -19,7 +19,9 @@ package org.beangle.otk.doc.web.action
 
 import org.beangle.commons.bean.Properties
 import org.beangle.commons.codec.digest.Digests
+import org.beangle.commons.net.http.HttpUtils
 import org.beangle.doc.core.{PageMargin, PrintOptions}
+import org.beangle.doc.office.LibreOfficeConverter
 import org.beangle.doc.pdf.{Encryptor, SPDConverter}
 import org.beangle.webmvc.annotation.*
 import org.beangle.webmvc.context.Params
@@ -33,11 +35,13 @@ import java.net.URI
  */
 class PdfWS extends ActionSupport {
 
-  var converter: SPDConverter = _
+  var htmlConverter: SPDConverter = _
+
+  var doceConverter: LibreOfficeConverter = _
 
   @mapping("")
   def index(@param("url") url: String): View = {
-    if null == converter then converter = SPDConverter.getInstance()
+    if null == htmlConverter then htmlConverter = SPDConverter.getInstance()
     val pdf = File.createTempFile("doc", ".pdf")
     val options = PrintOptions.defaultOptions
 
@@ -49,7 +53,7 @@ class PdfWS extends ActionSupport {
         Properties.copy(options, k, v)
       }
     }
-    if converter.convert(URI.create(url), pdf, options) then
+    if htmlConverter.convert(URI.create(url), pdf, options) then
       val userPassword = get("password")
       val ownerPassword = get("ownerPassword").getOrElse(Digests.md5Hex("Cannot change it."))
       Encryptor.encrypt(pdf, userPassword, ownerPassword)
@@ -59,6 +63,25 @@ class PdfWS extends ActionSupport {
       }
     else
       Status(500)
+  }
+
+  /** Convert a doc url to pdf
+   *
+   * @param url
+   * @return
+   */
+  def doc(@param("url") url: String): View = {
+    val doc = File.createTempFile("doc", ".docx")
+    val pdf = File.createTempFile("doc", ".pdf")
+    if (HttpUtils.download(url, doc)) {
+      doceConverter.convertToPdf(doc, pdf)
+      Stream(pdf).cleanup(() =>
+        doc.delete()
+        pdf.delete()
+      )
+    } else {
+      Status.NotFound
+    }
   }
 
 }
