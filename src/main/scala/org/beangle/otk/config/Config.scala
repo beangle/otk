@@ -19,9 +19,9 @@ package org.beangle.otk.config
 
 import org.beangle.commons.collection.Collections
 import org.beangle.commons.lang.SystemInfo
+import org.beangle.commons.xml.{Document, Node}
 
 import java.io.{File, FileInputStream}
-import scala.xml.Node
 
 object Config {
 
@@ -50,8 +50,7 @@ object Config {
     private def loadConf(): Map[String, String] = {
       var elem: Node = null
       getConfigFile foreach { file =>
-        val is = new FileInputStream(file)
-        (scala.xml.XML.load(is) \\ "redis") foreach { e => elem = e }
+        (Document.parse(file) \\ "redis") foreach { e => elem = e }
       }
 
       if (null != elem) {

@@ -54,7 +54,7 @@ class QrWS extends ActionSupport {
     }
     val os = new ByteArrayOutputStream()
     ImageIO.write(image, "PNG", os)
-    Stream(new ByteArrayInputStream(os.toByteArray), MediaTypes.ImagePng, "qrcode.png")
+    Stream(new ByteArrayInputStream(os.toByteArray), MediaTypes.png, "qrcode.png")
   }
 
   private def addLogo(qrImg: BufferedImage, logoBytes: Array[Byte]): Unit = {

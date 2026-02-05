@@ -38,7 +38,7 @@ class ExcelWS extends ActionSupport, ServletSupport {
     val doc = TableParser.parse(html)
     val workbook = TableWriter.write(doc)
     val os = response.getOutputStream
-    response.setContentType(MediaTypes.ApplicationXlsx.toString)
+    response.setContentType(MediaTypes.xlsx.toString)
     RequestUtils.setContentDisposition(response, doc.title.getOrElse("table.xlsx"))
     workbook.write(os)
     workbook.close()

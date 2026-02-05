@@ -45,7 +45,7 @@ class IndexWS extends ActionSupport, ServletSupport, Initializing {
     if (Strings.isEmpty(id) || id.length != 50) {
       Status.NotFound
     } else {
-      Stream(captchaService.getChallenge(id), MediaTypes.ImageJpeg, id + ".jpg")
+      Stream(captchaService.getChallenge(id), MediaTypes.jpeg, id + ".jpg")
     }
   }
 

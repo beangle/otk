@@ -17,7 +17,6 @@
 
 package org.beangle.otk.captcha.core.service
 
-import org.beangle.commons.logging.Logging
 import org.beangle.otk.captcha.core.{Captcha, CaptchaEngine, CaptchaException}
 
 object CaptchaService {
@@ -32,8 +31,7 @@ trait CaptchaService[C, A] {
   def validateResponse(id: String, response: A, removeAfterCheck: Boolean = true): Boolean
 }
 
-class DefaultCaptchaService[C, A](val store: CaptchaStore[A], val engine: CaptchaEngine[C, A])
-  extends CaptchaService[C, A] with Logging {
+class DefaultCaptchaService[C, A](val store: CaptchaStore[A], val engine: CaptchaEngine[C, A]) extends CaptchaService[C, A] {
 
   override def getChallenge(id: String): C = {
     val captcha = this.engine.next()

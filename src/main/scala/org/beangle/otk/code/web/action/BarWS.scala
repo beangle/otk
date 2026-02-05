@@ -51,7 +51,7 @@ class BarWS extends ActionSupport {
       val image = MatrixToImageWriter.toBufferedImage(bitMatrix)
       val os = new ByteArrayOutputStream()
       ImageIO.write(image, "PNG", os)
-      Stream(new ByteArrayInputStream(os.toByteArray),  MediaTypes.ImagePng, "barcode.png")
+      Stream(new ByteArrayInputStream(os.toByteArray),  MediaTypes.png, "barcode.png")
     } else {
       val res = ActionContext.current.response
       res.setContentType("text/html;charset=utf-8")
