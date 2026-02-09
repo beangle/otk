@@ -43,6 +43,6 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(pinyin4j, zxing, scalatest, jedis),
     libraryDependencies ++= Seq(spring_context, spring_beans, caffeine),
     libraryDependencies ++= Seq(slf4j, logback_classic, logback_core),
-    libraryDependencies ++= Seq(language_en, guava, beangle_config),
+    libraryDependencies ++= Seq(language_en, guava, beangle_config, typesafe_config),
     libraryDependencies ++= Seq(jodconverter_local, libreoffice)
   )

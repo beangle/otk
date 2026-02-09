@@ -33,7 +33,7 @@ import java.io.InputStream
 class IndexWS extends ActionSupport, ServletSupport, Initializing {
 
   var cacheManager: CacheManager = _
-  var captchaService: CaptchaService[InputStream, String] = _
+  private var captchaService: CaptchaService[InputStream, String] = _
 
   override def init(): Unit = {
     val store = new CaptchaStore.CacheStore(cacheManager.getCache("captcha", classOf[String], classOf[String]))

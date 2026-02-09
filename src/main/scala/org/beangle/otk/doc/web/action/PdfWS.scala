@@ -35,9 +35,9 @@ import java.net.URI
  */
 class PdfWS extends ActionSupport, Disposable {
 
-  var htmlConverter: SPDConverter = _
+  private var htmlConverter: SPDConverter = _
 
-  var docConverter: Option[LibreOfficeConverter] = None
+  private var docConverter: LibreOfficeConverter = _
 
   @mapping("")
   def index(@param("url") url: String): View = {
@@ -81,21 +81,21 @@ class PdfWS extends ActionSupport, Disposable {
    * @return
    */
   private def convertDocToPdf(url: String): View = {
-    if (docConverter.isEmpty) {
+    if (docConverter == null) {
       if (LibreOfficeLauncher.findSoffice().isEmpty) {
         error("Cannot find libreoffice in server,Doc to Pdf converter need it.")
       } else {
         val ct = new LibreOfficeConverter
         ct.processCount = Math.min(4, Runtime.getRuntime.availableProcessors())
         ct.init()
-        docConverter = Some(ct)
+        docConverter = ct
       }
     }
 
     val doc = File.createTempFile("doc", ".docx")
     val pdf = File.createTempFile("doc", ".pdf")
     if (HttpUtils.download(url, doc)) {
-      docConverter.get.convertToPdf(doc, pdf)
+      docConverter.convertToPdf(doc, pdf)
       Stream(pdf).cleanup(() =>
         doc.delete()
         pdf.delete()
@@ -106,8 +106,6 @@ class PdfWS extends ActionSupport, Disposable {
   }
 
   override def destroy(): Unit = {
-    docConverter foreach { c =>
-      c.destroy()
-    }
+    if (null != docConverter) docConverter.destroy()
   }
 }
