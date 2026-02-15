@@ -22,7 +22,7 @@ import org.beangle.commons.codec.digest.Digests
 import org.beangle.commons.net.http.HttpUtils
 import org.beangle.doc.core.{PageMargin, PrintOptions}
 import org.beangle.doc.office.{LibreOfficeConverter, LibreOfficeLauncher}
-import org.beangle.doc.pdf.{Encryptor, SPDConverter}
+import org.beangle.doc.pdf.{Docs, SPDConverter}
 import org.beangle.webmvc.annotation.*
 import org.beangle.webmvc.context.Params
 import org.beangle.webmvc.support.ActionSupport
@@ -66,7 +66,7 @@ class PdfWS extends ActionSupport, Disposable {
     if htmlConverter.convert(URI.create(url), pdf, options) then
       val userPassword = get("password")
       val ownerPassword = get("ownerPassword").getOrElse(Digests.md5Hex("Cannot change it."))
-      Encryptor.encrypt(pdf, userPassword, ownerPassword)
+      Docs.encrypt(pdf, userPassword, ownerPassword)
       get("fileName") match {
         case Some(f) => Stream(pdf, f)
         case None => Stream(pdf)
