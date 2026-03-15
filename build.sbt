@@ -23,9 +23,8 @@ ThisBuild / developers := List(
 ThisBuild / description := "Beangle online toolkit"
 ThisBuild / homepage := Some(url("http://beangle.github.io/otk/index.html"))
 
-val beangle_she = "org.beangle.she" % "beangle-she" % "0.0.1"
+val beangle_she = "org.beangle.she" % "beangle-she" % "0.0.4"
 val beangle_cache = "org.beangle.cache" % "beangle-cache" % "0.1.19"
-val beangle_serializer = "org.beangle.serializer" % "beangle-serializer" % "0.1.24"
 val beangle_doc_pdf = "org.beangle.doc" % "beangle-doc-pdf" % "0.5.3"
 val beangle_doc_excel = "org.beangle.doc" % "beangle-doc-excel" % "0.5.3"
 val beangle_doc_docx = "org.beangle.doc" % "beangle-doc-docx" % "0.5.3"
@@ -40,7 +39,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "beangle-otk-ws",
     common,
-    libraryDependencies ++= Seq(beangle_she, beangle_serializer, typesafe_config),
+    libraryDependencies ++= Seq(beangle_she, typesafe_config),
     libraryDependencies ++= Seq(beangle_doc_pdf, beangle_doc_excel, beangle_doc_docx, jodconverter_local, libreoffice),
     libraryDependencies ++= Seq(pinyin4j, zxing),
     libraryDependencies ++= Seq(beangle_cache, caffeine, jedis),
