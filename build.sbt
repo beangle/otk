@@ -2,7 +2,7 @@ import org.beangle.parent.Dependencies.*
 import org.beangle.parent.Settings.*
 
 ThisBuild / organization := "org.beangle.otk"
-ThisBuild / version := "0.0.28"
+ThisBuild / version := "0.0.29-SNAPSHOT"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
