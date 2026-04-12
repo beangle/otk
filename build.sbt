@@ -2,7 +2,7 @@ import org.beangle.parent.Dependencies.*
 import org.beangle.parent.Settings.*
 
 ThisBuild / organization := "org.beangle.otk"
-ThisBuild / version := "0.0.29-SNAPSHOT"
+ThisBuild / version := "0.0.29"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
@@ -23,7 +23,7 @@ ThisBuild / developers := List(
 ThisBuild / description := "Beangle online toolkit"
 ThisBuild / homepage := Some(url("http://beangle.github.io/otk/index.html"))
 
-val beangle_she = "org.beangle.she" % "beangle-she" % "0.0.4"
+val beangle_she = "org.beangle.she" % "beangle-she" % "0.0.8"
 val beangle_cache = "org.beangle.cache" % "beangle-cache" % "0.1.19"
 val beangle_doc_pdf = "org.beangle.doc" % "beangle-doc-pdf" % "0.5.3"
 val beangle_doc_excel = "org.beangle.doc" % "beangle-doc-excel" % "0.5.3"

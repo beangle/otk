@@ -28,7 +28,7 @@ object CaptchaService {
 trait CaptchaService[C, A] {
   def getChallenge(id: String): C
 
-  def validateResponse(id: String, response: A, removeAfterCheck: Boolean = true): Boolean
+  def validateResponse(id: String, response: A, destroy: Boolean = true): Boolean
 }
 
 class DefaultCaptchaService[C, A](val store: CaptchaStore[A], val engine: CaptchaEngine[C, A]) extends CaptchaService[C, A] {
@@ -39,11 +39,11 @@ class DefaultCaptchaService[C, A](val store: CaptchaStore[A], val engine: Captch
     captcha.challenge
   }
 
-  override def validateResponse(id: String, response: A, removeAfterCheck: Boolean = true): Boolean = {
+  override def validateResponse(id: String, response: A, destroy: Boolean = true): Boolean = {
     this.store.get(id) match {
       case None => false
       case Some(answer) =>
-        if (removeAfterCheck) store.remove(id)
+        if (destroy) store.remove(id)
         engine.validate(answer, response)
     }
   }

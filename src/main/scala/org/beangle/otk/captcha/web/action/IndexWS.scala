@@ -20,6 +20,7 @@ package org.beangle.otk.captcha.web.action
 import org.beangle.commons.activation.MediaTypes
 import org.beangle.commons.bean.Initializing
 import org.beangle.commons.cache.CacheManager
+import org.beangle.commons.json.JsonObject
 import org.beangle.commons.lang.Strings
 import org.beangle.otk.captcha.core.image.GmailEngine
 import org.beangle.otk.captcha.core.service.{CaptchaService, CaptchaStore, DefaultCaptchaService}
@@ -50,15 +51,18 @@ class IndexWS extends ActionSupport, ServletSupport, Initializing {
   }
 
   @mapping("validate/{id}")
-  def validate(@param("id") id: String): View = {
+  def validate(@param("id") id: String): JsonObject = {
     val captcha_response = get("response").orNull
-    val trial = getBoolean("trial", false)
-    if captchaService.validateResponse(id, captcha_response, !trial) then
-      response.getWriter.write("success")
-      Status.Ok
-    else
-      response.getWriter.write("mismatch")
-      Status.NotFound
+    val destroy = getBoolean("destroy", false)
+    val rs = new JsonObject()
+    if captchaService.validateResponse(id, captcha_response, destroy) then {
+      rs.add("code", 200)
+      rs.add("msg", "success")
+    } else {
+      rs.add("code", 404)
+      rs.add("msg", "mismatch")
+    }
+    rs
   }
 
 }
