@@ -22,7 +22,7 @@ import org.beangle.commons.codec.digest.Digests
 import org.beangle.commons.net.http.HttpUtils
 import org.beangle.doc.core.{PageMargin, PrintOptions}
 import org.beangle.doc.office.{LibreOfficeConverter, LibreOfficeLauncher}
-import org.beangle.doc.pdf.{Docs, SPDConverter}
+import org.beangle.doc.pdf.{Docs, PdfMakerService}
 import org.beangle.webmvc.annotation.*
 import org.beangle.webmvc.context.Params
 import org.beangle.webmvc.support.ActionSupport
@@ -30,14 +30,29 @@ import org.beangle.webmvc.view.{Status, Stream, View}
 
 import java.io.File
 import java.net.URI
+import scala.compiletime.uninitialized
 
 /** Convert a html url to pdf
  */
 class PdfWS extends ActionSupport, Disposable {
 
-  private var htmlConverter: SPDConverter = _
+  private var pdfService: PdfMakerService = uninitialized
 
-  private var docConverter: LibreOfficeConverter = _
+  /** Container-managed printer: reuses the Chrome process and releases it after idle. */
+  private def printer: PdfMakerService = {
+    if (null == pdfService) {
+      synchronized {
+        if (null == pdfService) {
+          val service = new PdfMakerService
+          service.init()
+          pdfService = service
+        }
+      }
+    }
+    pdfService
+  }
+
+  private var docConverter: LibreOfficeConverter = uninitialized
 
   @mapping("")
   def index(@param("url") url: String): View = {
@@ -51,7 +66,6 @@ class PdfWS extends ActionSupport, Disposable {
   }
 
   private def convertHtmlToPdf(url: String): View = {
-    if null == htmlConverter then htmlConverter = SPDConverter.getInstance()
     val pdf = File.createTempFile("doc", ".pdf")
     val options = PrintOptions.defaultOptions
 
@@ -63,7 +77,7 @@ class PdfWS extends ActionSupport, Disposable {
         Properties.copy(options, k, v)
       }
     }
-    if htmlConverter.convert(URI.create(url), pdf, options) then
+    if printer.print(URI.create(url), pdf, options) then
       val userPassword = get("password")
       val ownerPassword = get("ownerPassword").getOrElse(Digests.md5Hex("Cannot change it."))
       Docs.encrypt(pdf, userPassword, ownerPassword)
@@ -107,5 +121,6 @@ class PdfWS extends ActionSupport, Disposable {
 
   override def destroy(): Unit = {
     if (null != docConverter) docConverter.destroy()
+    if (null != pdfService) pdfService.destroy()
   }
 }

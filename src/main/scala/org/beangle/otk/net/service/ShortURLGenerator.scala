@@ -21,14 +21,15 @@ import org.beangle.commons.bean.Initializing
 import org.beangle.commons.cache.{Cache, CacheManager}
 
 import java.util.Random
+import scala.compiletime.uninitialized
 
 class ShortURLGenerator extends Initializing {
   private val BASE62: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
   private val SHORT_URL_LENGTH: Int = 6
   private val random: Random = new Random
-  private var short2long: Cache[String, String] = _
-  private var long2short: Cache[String, String] = _
-  var cacheManager: CacheManager = _
+  private var short2long: Cache[String, String] = uninitialized
+  private var long2short: Cache[String, String] = uninitialized
+  var cacheManager: CacheManager = uninitialized
 
   override def init(): Unit = {
     short2long = cacheManager.getCache("shorturl-short", classOf[String], classOf[String])

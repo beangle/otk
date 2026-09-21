@@ -27,7 +27,7 @@ import org.beangle.otk.net.web.action.UrlWS
 class DefaultModule extends BindModule {
   protected override def binding(): Unit = {
     bind("redis.Factory", classOf[RedisClientFactory]).constructor(Config.Redis.conf)
-    bind("CacheManager.redis", classOf[RedisCacheManager]).constructor(ref("redis.Factory"), DefaultBinarySerializer, true)
+    bind("CacheManager.redis", classOf[RedisCacheManager]).constructor(ref("redis.Factory"), new DefaultBinarySerializer, true)
       .property("ttl", 7 * 24 * 60 * 60) //7 days
 
     bind(classOf[ShortURLGenerator]).property("cacheManager", ref("CacheManager.redis"))

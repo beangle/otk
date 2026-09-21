@@ -29,12 +29,13 @@ import org.beangle.webmvc.support.{ActionSupport, ServletSupport}
 import org.beangle.webmvc.view.{Status, Stream, View}
 
 import java.io.InputStream
+import scala.compiletime.uninitialized
 
 @action("")
 class IndexWS extends ActionSupport, ServletSupport, Initializing {
 
-  var cacheManager: CacheManager = _
-  private var captchaService: CaptchaService[InputStream, String] = _
+  var cacheManager: CacheManager = uninitialized
+  private var captchaService: CaptchaService[InputStream, String] = uninitialized
 
   override def init(): Unit = {
     val store = new CaptchaStore.CacheStore(cacheManager.getCache("captcha", classOf[String], classOf[String]))

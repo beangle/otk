@@ -22,6 +22,7 @@ import org.beangle.commons.lang.SystemInfo
 import org.beangle.commons.xml.{Document, Node}
 
 import java.io.{File, FileInputStream}
+import scala.compiletime.uninitialized
 
 object Config {
 
@@ -32,7 +33,7 @@ object Config {
 
   object Redis {
 
-    private var properties: Map[String, String] = _
+    private var properties: Map[String, String] = uninitialized
 
     def available(): Boolean = {
       conf.nonEmpty

@@ -1,0 +1,2 @@
+# beangle-otk-ws 模块 AOT 注册器（otk 自身资源 + LanguageTool 反射面）
+org.beangle.otk.aot.OtkAotHints

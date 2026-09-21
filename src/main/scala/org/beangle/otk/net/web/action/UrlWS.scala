@@ -22,11 +22,12 @@ import org.beangle.otk.net.service.ShortURLGenerator
 import org.beangle.webmvc.annotation.{mapping, param}
 import org.beangle.webmvc.support.{ActionSupport, ServletSupport}
 import org.beangle.webmvc.view.{Status, View}
+import scala.compiletime.uninitialized
 
 /** 短地址服务
  */
 class UrlWS extends ActionSupport, ServletSupport {
-  var generator: ShortURLGenerator = _
+  var generator: ShortURLGenerator = uninitialized
 
   /** 直接访问短链接
    *

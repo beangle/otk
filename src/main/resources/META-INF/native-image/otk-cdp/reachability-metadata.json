@@ -1,0 +1,176 @@
+{
+  "comment": [
+    "Runtime reflection/resources of the /doc/pdf CDP path that the static AOT analysis (AotPlugin)",
+    "cannot derive: the PDF service talks CDP over a WebSocket, and the Tyrus client container plus",
+    "its Grizzly transport are discovered and instantiated by ServiceLoader/Class.forName at run time,",
+    "so without these entries the native image fails with",
+    "\"jakarta.websocket.DeploymentException: org.glassfish.tyrus.container.grizzly.client.GrizzlyClientContainer\".",
+    "Collected with the GraalVM 25 native-image tracing agent (25.3.4.1) while printing a page to PDF."
+  ],
+  "reflection": [
+    {
+      "type": "jakarta.websocket.Endpoint"
+    },
+    {
+      "type": "org.beangle.doc.pdf.cdt.ChromePage[]"
+    },
+    {
+      "type": "org.beangle.doc.pdf.cdt.WebSocket$$anon$1"
+    },
+    {
+      "type": "org.glassfish.grizzly.IOEventLifeCycleListener[]"
+    },
+    {
+      "type": "org.glassfish.grizzly.asyncqueue.TaskQueue"
+    },
+    {
+      "type": "org.glassfish.grizzly.http.ContentEncoding[]"
+    },
+    {
+      "type": "org.glassfish.grizzly.http.TransferEncoding[]"
+    },
+    {
+      "type": "org.glassfish.grizzly.nio.NIOConnection"
+    },
+    {
+      "type": "org.glassfish.tyrus.container.grizzly.client.GrizzlyClientContainer",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.InputStreamDecoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.NoOpByteArrayCoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.NoOpByteBufferCoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.NoOpTextCoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.PrimitiveDecoders$BooleanDecoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.PrimitiveDecoders$ByteDecoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.PrimitiveDecoders$CharacterDecoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.PrimitiveDecoders$DoubleDecoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.PrimitiveDecoders$FloatDecoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.PrimitiveDecoders$IntegerDecoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.PrimitiveDecoders$LongDecoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.PrimitiveDecoders$ShortDecoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.glassfish.tyrus.core.coder.ReaderDecoder",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "glob": "org/glassfish/grizzly/localization/log.properties"
+    },
+    {
+      "glob": "org/glassfish/grizzly/localization/log_en.properties"
+    },
+    {
+      "glob": "org/glassfish/grizzly/version.properties"
+    },
+    {
+      "bundle": "org.glassfish.grizzly.localization.log"
+    }
+  ]
+}
